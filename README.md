@@ -1,6 +1,6 @@
 # Retrace - AI-Powered Incident Investigation Agent
 
-An incident root-cause analysis agent combining graph databases (FalkorDB), Groq API (`groq`), Google Gemini (`google-genai`), and an interactive incident dashboard.
+An incident root-cause analysis agent combining graph databases (FalkorDB), Groq API (`groq`), and an interactive incident dashboard.
 
 ---
 
