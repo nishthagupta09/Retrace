@@ -107,6 +107,16 @@ The relationships encode dependencies, incident associations, deployments, and s
 
 The repository's `graph/schema.md`, `graph/queries/sample_queries.cyp`, and `graph/seed_graph.py` contain the implementation-specific schema, representative queries, and seed data.
 
+## Graph Queries and Algorithms
+
+Retrace uses **Cypher queries and bounded path traversal** natively in FalkorDB rather than separate graph algorithm libraries (such as PageRank or Community Detection).
+
+- **Dependency and Blast Radius Traversal:** Path traversal is implemented declaratively via Cypher variable-length relationship matching (`[:DEPENDS_ON*1..4]`), finding multi-hop dependencies from degraded frontends down to failing database systems.
+- **Incident and Change Correlation:** Single-hop and multi-hop pattern matches link `(:Incident)-[:AFFECTS]->(:Service)` and `(:Deployment)-[:CHANGED]->(:Service)`.
+- **System Topology & Aggregations:** Node and edge projection queries aggregate service states, ownership teams, and deployment counts for system-wide topology exploration.
+
+For the full catalog of all Cypher queries utilized across the codebase with detailed explanations of their parameters, results, and investigation roles, see **[`docs/CYPHER_QUERIES.md`](docs/CYPHER_QUERIES.md)**.
+
 ### Example Investigation Scenario
 
 The synthetic scenario includes incident `INC-8401`, elevated HTTP 500 errors, a failing `PaymentsAPI`, an unreachable `PaymentsPostgresDB`, and deployment `dep-902` involving a connection-pool and timeout change.
