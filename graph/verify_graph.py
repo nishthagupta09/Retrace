@@ -19,14 +19,19 @@ env_path = Path(__file__).resolve().parent.parent / "backend" / ".env"
 load_dotenv(dotenv_path=env_path)
 
 GRAPH_NAME = "retrace_incidents"
+DEFAULT_URL = os.getenv("FALKORDB_URL", "")
 DEFAULT_HOST = os.getenv("FALKORDB_HOST", "localhost")
 DEFAULT_PORT = int(os.getenv("FALKORDB_PORT", "6380"))
 
 
-def verify(host: str = DEFAULT_HOST, port: int = DEFAULT_PORT):
-    print(f"Connecting to FalkorDB at {host}:{port} for verification...")
+def verify(url: str = DEFAULT_URL, host: str = DEFAULT_HOST, port: int = DEFAULT_PORT):
     try:
-        client = FalkorDB(host=host, port=port)
+        if url and url.strip():
+            print("Connecting to FalkorDB via configured FALKORDB_URL...")
+            client = FalkorDB.from_url(url.strip())
+        else:
+            print(f"Connecting to FalkorDB at {host}:{port} for verification...")
+            client = FalkorDB(host=host, port=port)
         graph = client.select_graph(GRAPH_NAME)
     except Exception as e:
         print(f"Error connecting to FalkorDB: {e}", file=sys.stderr)

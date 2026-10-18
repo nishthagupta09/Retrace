@@ -31,6 +31,7 @@ class Settings(BaseSettings):
     PORT: int = Field(default=8000)
 
     # FalkorDB Graph connection
+    FALKORDB_URL: str = Field(default="")
     FALKORDB_HOST: str = Field(default="localhost")
     FALKORDB_PORT: int = Field(default=6380)
     FALKORDB_GRAPH: str = Field(default="retrace_incidents")

@@ -9,16 +9,25 @@ _client: Optional[FalkorDB] = None
 
 
 def get_falkordb_client() -> FalkorDB:
-    """Return a singleton FalkorDB client instance."""
+    """Return a singleton FalkorDB client instance.
+    
+    Supports FALKORDB_URL (e.g. falkors://, falkor://) directly via FalkorDB.from_url,
+    with fallback to FALKORDB_HOST and FALKORDB_PORT for local development.
+    Credentials and connection URLs are never logged.
+    """
     global _client
     if _client is None:
-        logger.info(
-            f"Connecting to FalkorDB at {settings.FALKORDB_HOST}:{settings.FALKORDB_PORT}"
-        )
-        _client = FalkorDB(
-            host=settings.FALKORDB_HOST,
-            port=settings.FALKORDB_PORT,
-        )
+        if settings.FALKORDB_URL and settings.FALKORDB_URL.strip():
+            logger.info("Connecting to FalkorDB via configured connection URL (TLS/auth enabled)")
+            _client = FalkorDB.from_url(settings.FALKORDB_URL.strip())
+        else:
+            logger.info(
+                f"Connecting to FalkorDB at {settings.FALKORDB_HOST}:{settings.FALKORDB_PORT}"
+            )
+            _client = FalkorDB(
+                host=settings.FALKORDB_HOST,
+                port=settings.FALKORDB_PORT,
+            )
     return _client
 
 
