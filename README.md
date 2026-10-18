@@ -6,6 +6,8 @@ Instead of relying on isolated logs or manually searching across multiple system
 
 > **Project status:** Hackathon project and prototype. The included infrastructure data is synthetic and intended for demonstration, not production incident response.
 
+**Deployed link:** https://retrace-frontend.onrender.com/
+
 ## Hackathon Submission
 
 **Project:** Retrace — AI-Powered Incident Investigation
