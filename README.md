@@ -375,10 +375,6 @@ The prototype uses synthetic data and is intended for demonstration. Do not stor
 
 Deployment URLs will be added here after the services are deployed and verified.
 
-- **Live demo:** Pending deployment
-- **Backend API:** Pending deployment
-- **API documentation:** Pending deployment
-
 ## Security and Responsible Use
 
 - Never commit API keys, passwords, private keys, or real `.env` files.
@@ -392,15 +388,7 @@ Deployment URLs will be added here after the services are deployed and verified.
 
 AI coding assistants were used during the development process for implementation support, debugging, documentation, and refinement. The project is intended to be reviewed and tested by its developers before use.
 
-## Future Improvements
-
-Potential extensions include:
-
-- Integration with real observability and deployment data sources.
-- More advanced dependency-impact analysis.
-- Stronger evaluation of investigation accuracy and evidence traceability.
-- Persistent investigation history and incident comparisons.
-- Additional automated tests for provider failures and graph-query edge cases.
+AI Agents Used: Antigravity (Model: Gemini-3.8-flash)
 
 ## License
 
